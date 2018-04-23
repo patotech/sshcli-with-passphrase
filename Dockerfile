@@ -11,7 +11,7 @@ COPY scripts/ /scripts/
 # untar into the temporary directory and install the tcllib to /usr/lib
 # so scripts can find it.
 # Adds "sleep 1" because of error "/scripts/wsget.tcl: Text file busy"
-RUN apk add --update-cache tcl tcl-tls expect openssh-client && \
+RUN apk add --update-cache tcl tcl-tls expect openssh-client bash && \
     chmod u+x /scripts/wsget.tcl && \
     sleep 1 && sync && \
     /scripts/wsget.tcl https://github.com/tcltk/tcllib/archive/tcllib-1-19.tar.gz /tmp/ && \
@@ -42,4 +42,4 @@ ENV TCLLIBPATH /opt/tcl /opt/tcl/lib
 
 # Arrange for a nice prompt
 COPY scripts/tclshrc /root/.tclshrc
-ENTRYPOINT ["tclsh8.6"]
+ENTRYPOINT ["bash"]
