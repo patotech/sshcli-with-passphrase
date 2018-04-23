@@ -10,8 +10,10 @@ COPY scripts/ /scripts/
 # support http and https (as from the installed packages above)
 # untar into the temporary directory and install the tcllib to /usr/lib
 # so scripts can find it.
+# Adds "sleep 1" because of error "/scripts/wsget.tcl: Text file busy"
 RUN apk add --update-cache tcl tcl-tls expect openssh-client && \
     chmod u+x /scripts/wsget.tcl && \
+    sleep 1 && \
     /scripts/wsget.tcl https://github.com/tcltk/tcllib/archive/tcllib-1-19.tar.gz /tmp/ && \
     tar -zx -C /tmp -f /tmp/tcllib-1-19.tar.gz && \
     tclsh /tmp/tcllib-tcllib_1_19/installer.tcl -no-html -no-nroff -no-examples -no-gui -no-apps -no-wait -pkg-path /usr/lib/tcllib1.19 && \
