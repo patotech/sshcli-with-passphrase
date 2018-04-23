@@ -20,7 +20,6 @@ RUN apk add --update-cache tcl tcl-tls expect openssh-client && \
 
 # tdom compilation and installation
 RUN apk add --no-cache tcl-dev build-base && \
-    chmod u+x /scripts/wsget.tcl && \
     /scripts/wsget.tcl http://tdom.org/downloads/tdom-0.9.0-src.tgz /tmp/ && \
     tar -zx -C  /tmp -f /tmp/tdom-0.9.0-src.tgz && \
     cd /tmp/tdom-0.9.0/unix && \
